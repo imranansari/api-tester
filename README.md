@@ -3,18 +3,15 @@
 5
 
 ```mermaid
-sequenceDiagram
-    autonumber
-    actor C as Customer
-    participant WS as Web Server
-    participant WH as Warehouse
-    participant S as Stripe
+C4Context
+    title C4 Context Diagram
 
-    C->>WS: Submit Order
-    activate WS
-    WS->>WH: Check Stock
-    WS->>S: Process Payment
-    WS->>WH: Dispatch Order
-    WS->>C: Show Success
-    deactivate WS
+    Person(customer, "Customer", "Online Customer")
+    System(eCommerce, "E-Commerce", "E-Commerce System")
+    System_Ext(stripe, "Stripe", "Payments")
+    System_Ext(warehouse, "Warehouse", "Stock inventory and dispatch")
+
+    Rel_D(customer, eCommerce, "orders products", "HTTPS")
+    Rel_L(eCommerce, stripe, "process payment", "HTTPS")
+    Rel_D(eCommerce, warehouse, "check stock", "HTTPS")
 ```
